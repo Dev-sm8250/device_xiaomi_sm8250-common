@@ -15,6 +15,17 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/packages/apps/CarrierConfig
 
+#Zeus-OS bringup
+YOUR_HW_PLATFORM := sm8250
+QCOM_BOARD_PLATFORMS += sm8250
+PRODUCT_BOARD_PLATFORM := $(YOUR_HW_PLATFORM)
+PRODUCT_USES_QCOM_HARDWARE := true
+
+#Zeus-OS Hals
+SRC_AUDIO_HAL_DIR := hardware/qcom-caf/$(YOUR_HW_PLATFORM)/audio
+SRC_DISPLAY_HAL_DIR := hardware/qcom-caf/$(YOUR_HW_PLATFORM)/display
+SRC_MEDIA_HAL_DIR := hardware/qcom-caf/$(YOUR_HW_PLATFORM)/media
+
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
@@ -369,7 +380,8 @@ PRODUCT_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/xiaomi
+    hardware/xiaomi \
+    hardware/qcom-caf/$(YOUR_HW_PLATFORM)
 
 # Telephony
 PRODUCT_PACKAGES += \
